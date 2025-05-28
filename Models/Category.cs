@@ -1,4 +1,6 @@
-﻿namespace ZooApp.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ZooApp.Models
 {
     /// <summary>
     /// Vertegenwoordigt een categorie zoals 'Zoogdieren', 'Reptielen', etc.
@@ -7,6 +9,8 @@
     {
         public int Id { get; set; }
 
+        [Required(ErrorMessage = "Naam is verplicht.")]
+        [Display(Name = "Categorienaam")]
         public string Name { get; set; } = string.Empty; // Naam van de categorie
 
         public ICollection<Animal> Animals { get; set; } = new List<Animal>(); // Alle dieren in deze categorie

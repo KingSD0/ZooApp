@@ -1,0 +1,28 @@
+﻿@model ZooApp.Models.Category
+
+@{
+    ViewData["Title"] = "Categorie verwijderen";
+}
+
+<h1>Categorie verwijderen</h1>
+
+<h4>Weet je zeker dat je deze categorie wilt verwijderen?</h4>
+<hr />
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+</div>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group mt-3">
+        <input type="submit" value="Verwijderen" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Annuleren</a>
+    </div>
+</form>
