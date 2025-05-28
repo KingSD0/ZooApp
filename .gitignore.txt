@@ -1,12 +1,12 @@
 # Visual Studio
-.vs/
+
 *.user
 *.suo
 
 # Build folders
 bin/
 obj/
-
+.vs/
 # EF Core
 Migrations/
 
