@@ -1,72 +1,49 @@
 ﻿@model ZooApp.Models.Animal
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Dierdetails";
 }
 
-<h1>Details</h1>
+<h1>Dierdetails</h1>
 
-<div>
-    <h4>Animal</h4>
+<div class="mt-3">
+    <h4>Dierinformatie</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
+        <dt class="col-sm-3">Naam</dt>
+        <dd class="col-sm-9">@Model.Name</dd>
+
+        <dt class="col-sm-3">Soort</dt>
+        <dd class="col-sm-9">@Model.Species</dd>
+
+        <dt class="col-sm-3">Categorie</dt>
+        <dd class="col-sm-9">
+            @(Model.Category != null ? Model.Category.Name : "Geen")
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Species)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Species)
+
+        <dt class="col-sm-3">Grootte</dt>
+        <dd class="col-sm-9">@Model.Size</dd>
+
+        <dt class="col-sm-3">Voedingsklasse</dt>
+        <dd class="col-sm-9">@Model.DietaryClass</dd>
+
+        <dt class="col-sm-3">Activiteitspatroon</dt>
+        <dd class="col-sm-9">@Model.ActivityPattern</dd>
+
+        <dt class="col-sm-3">Verblijf</dt>
+        <dd class="col-sm-9">
+            @(Model.Enclosure != null ? Model.Enclosure.Name : "Geen")
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Category.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Size)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Size)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DietaryClass)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DietaryClass)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ActivityPattern)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ActivityPattern)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Enclosure)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Enclosure.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SpaceRequirement)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SpaceRequirement)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SecurityRequirement)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SecurityRequirement)
-        </dd>
+
+        <dt class="col-sm-3">Ruimtevereiste (m²)</dt>
+        <dd class="col-sm-9">@Model.SpaceRequirement</dd>
+
+        <dt class="col-sm-3">Beveiligingsniveau</dt>
+        <dd class="col-sm-9">@Model.SecurityRequirement</dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+<div class="mt-4">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Wijzig</a>
+    <a asp-action="Index" class="btn btn-secondary">Terug naar overzicht</a>
 </div>

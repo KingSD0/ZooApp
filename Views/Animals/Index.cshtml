@@ -1,83 +1,51 @@
 ﻿@model IEnumerable<ZooApp.Models.Animal>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Dierenoverzicht";
 }
 
-<h1>Index</h1>
+<h1 class="mb-4">Dierenoverzicht</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-success mb-3">Nieuw dier toevoegen</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Species)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Size)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DietaryClass)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ActivityPattern)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Enclosure)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SpaceRequirement)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SecurityRequirement)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Species)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Size)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DietaryClass)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ActivityPattern)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Enclosure.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SpaceRequirement)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SecurityRequirement)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Naam</th>
+                <th>Soort</th>
+                <th>Categorie</th>
+                <th>Grootte</th>
+                <th>Voedingsklasse</th>
+                <th>Activiteitspatroon</th>
+                <th>Verblijf</th>
+                <th>Ruimte (m²)</th>
+                <th>Beveiliging</th>
+                <th>Acties</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Species</td>
+                    <td>@(item.Category?.Name ?? "Geen")</td>
+                    <td>@item.Size</td>
+                    <td>@item.DietaryClass</td>
+                    <td>@item.ActivityPattern</td>
+                    <td>@(item.Enclosure?.Name ?? "Geen")</td>
+                    <td>@item.SpaceRequirement.ToString("0.##")</td>
+                    <td>@item.SecurityRequirement</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary me-1 mb-1">Wijzig</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info me-1 mb-1">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger mb-1">Verwijder</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

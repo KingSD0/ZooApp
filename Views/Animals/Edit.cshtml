@@ -1,74 +1,88 @@
 ﻿@model ZooApp.Models.Animal
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Dier bewerken";
 }
 
-<h1>Edit</h1>
+<h1>Dier bewerken</h1>
 
-<h4>Animal</h4>
+<h4>Diergegevens</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
+
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" class="form-control" placeholder="Bijv. Leo" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Species" class="control-label"></label>
-                <input asp-for="Species" class="form-control" />
+                <input asp-for="Species" class="form-control" placeholder="Bijv. Panthera leo" />
                 <span asp-validation-for="Species" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="CategoryId" class="control-label"></label>
-                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId">
+                    <option value="">-- Kies een categorie --</option>
+                </select>
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Size" class="control-label"></label>
-                <select asp-for="Size" class="form-control"></select>
+                <select asp-for="Size" class="form-control" asp-items="ViewBag.Size"></select>
                 <span asp-validation-for="Size" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="DietaryClass" class="control-label"></label>
-                <select asp-for="DietaryClass" class="form-control"></select>
+                <select asp-for="DietaryClass" class="form-control" asp-items="ViewBag.DietaryClass"></select>
                 <span asp-validation-for="DietaryClass" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="ActivityPattern" class="control-label"></label>
-                <select asp-for="ActivityPattern" class="form-control"></select>
+                <select asp-for="ActivityPattern" class="form-control" asp-items="ViewBag.ActivityPattern"></select>
                 <span asp-validation-for="ActivityPattern" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="EnclosureId" class="control-label"></label>
-                <select asp-for="EnclosureId" class="form-control" asp-items="ViewBag.EnclosureId"></select>
+                <select asp-for="EnclosureId" class="form-control" asp-items="ViewBag.EnclosureId">
+                    <option value="">-- Kies een verblijf --</option>
+                </select>
                 <span asp-validation-for="EnclosureId" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="SpaceRequirement" class="control-label"></label>
-                <input asp-for="SpaceRequirement" class="form-control" />
+                <input asp-for="SpaceRequirement" class="form-control" type="number" step="any" placeholder="Bijv. 12.5" />
                 <span asp-validation-for="SpaceRequirement" class="text-danger"></span>
             </div>
+
+
             <div class="form-group">
                 <label asp-for="SecurityRequirement" class="control-label"></label>
-                <select asp-for="SecurityRequirement" class="form-control"></select>
+                <select asp-for="SecurityRequirement" class="form-control" asp-items="ViewBag.SecurityRequirement"></select>
                 <span asp-validation-for="SecurityRequirement" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Opslaan" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Annuleren</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

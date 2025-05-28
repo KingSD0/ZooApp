@@ -9,27 +9,43 @@ namespace ZooApp.Models
     {
         public int Id { get; set; }
 
-        [Required]
-        public string Name { get; set; } = string.Empty; // Naam van het dier
+        [Required(ErrorMessage = "Naam is verplicht.")]
+        [StringLength(50, ErrorMessage = "Naam mag maximaal 50 tekens bevatten.")]
+        public string Name { get; set; } = string.Empty;
 
-        public string Species { get; set; } = string.Empty; // Soortnaam (bv. Panthera leo)
+        [Required(ErrorMessage = "Soort is verplicht.")]
+        [StringLength(50, ErrorMessage = "Soort mag maximaal 50 tekens bevatten.")]
+        public string Species { get; set; } = string.Empty;
 
-        public int? CategoryId { get; set; } // FK naar categorie (optioneel)
+        [Display(Name = "Categorie")]
+        public int? CategoryId { get; set; }
         public Category? Category { get; set; }
 
-        public Size Size { get; set; } // Grootteklasse (enum)
+        [Required(ErrorMessage = "Grootte is verplicht.")]
+        [Display(Name = "Grootte")]
+        public Size Size { get; set; }
 
-        public DietaryClass DietaryClass { get; set; } // Voedingsklasse (enum)
+        [Required(ErrorMessage = "Voedingsklasse is verplicht.")]
+        [Display(Name = "Voedingsklasse")]
+        public DietaryClass DietaryClass { get; set; }
 
-        public ActivityPattern ActivityPattern { get; set; } // Activiteitspatroon (enum)
+        [Required(ErrorMessage = "Activiteitspatroon is verplicht.")]
+        [Display(Name = "Activiteitspatroon")]
+        public ActivityPattern ActivityPattern { get; set; }
 
-        public ICollection<Animal>? Prey { get; set; } // Andere dieren die dit dier eet
+        public ICollection<Animal>? Prey { get; set; }
 
-        public int? EnclosureId { get; set; } // FK naar verblijf (optioneel)
+        [Display(Name = "Verblijf")]
+        public int? EnclosureId { get; set; }
         public Enclosure? Enclosure { get; set; }
 
-        public double SpaceRequirement { get; set; } // Vereiste ruimte in m² per dier
+        [Required(ErrorMessage = "Ruimtevereiste is verplicht.")]
+        [Range(0.1, 1000.0, ErrorMessage = "Ruimtevereiste moet tussen 0.1 en 1000 m² liggen.")]
+        [Display(Name = "Ruimtevereiste (m²)")]
+        public double SpaceRequirement { get; set; }
 
-        public SecurityLevel SecurityRequirement { get; set; } // Nodig beveiligingsniveau (enum)
+        [Required(ErrorMessage = "Beveiligingsniveau is verplicht.")]
+        [Display(Name = "Beveiligingsniveau")]
+        public SecurityLevel SecurityRequirement { get; set; }
     }
 }
