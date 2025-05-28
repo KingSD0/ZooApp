@@ -1,0 +1,25 @@
+# Visual Studio
+
+*.user
+*.suo
+
+# Build folders
+bin/
+obj/
+.vs/
+
+# EF Core
+Migrations/
+
+# Config
+appsettings.Development.json
+appsettings.json
+
+# Logs
+*.log
+
+# Rider
+.idea/
+
+# Others
+*.db
