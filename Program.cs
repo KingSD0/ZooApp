@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Voeg EF Core databasecontext toe met LocalDB 
 builder.Services.AddDbContext<ZooContext>(options =>
-    options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Dierentuin3;Trusted_Connection=True;MultipleActiveResultSets=true"));
+    options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Dierentuin03;Trusted_Connection=True;MultipleActiveResultSets=true"));
 
 // Voeg controllers en views toe
 builder.Services.AddControllersWithViews();

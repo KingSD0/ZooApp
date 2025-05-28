@@ -166,3 +166,4 @@ C:\Users\Hp\source\repos\ZooApp\obj\Debug\net8.0\refint\ZooApp.dll
 C:\Users\Hp\source\repos\ZooApp\obj\Debug\net8.0\ZooApp.pdb
 C:\Users\Hp\source\repos\ZooApp\obj\Debug\net8.0\ZooApp.genruntimeconfig.cache
 C:\Users\Hp\source\repos\ZooApp\obj\Debug\net8.0\ref\ZooApp.dll
+C:\Users\Hp\source\repos\ZooApp\obj\Debug\net8.0\ZooApp.sourcelink.json
