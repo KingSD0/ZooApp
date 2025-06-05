@@ -1,0 +1,83 @@
+﻿@model ZooApp.Models.Enclosure
+
+@{
+    ViewData["Title"] = "Nieuw verblijf toevoegen";
+
+    var climates = Enum.GetValues(typeof(ZooApp.Models.Climate)).Cast<ZooApp.Models.Climate>();
+    var habitatTypes = Enum.GetValues(typeof(ZooApp.Models.HabitatType)).Cast<ZooApp.Models.HabitatType>();
+    var securityLevels = Enum.GetValues(typeof(ZooApp.Models.SecurityLevel)).Cast<ZooApp.Models.SecurityLevel>();
+}
+
+<h1>Nieuw verblijf toevoegen</h1>
+
+<h4>Verblijfinformatie</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" placeholder="Bijv. Regenwoud" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Climate" class="control-label"></label>
+                <select asp-for="Climate" class="form-control">
+                    @foreach (var climate in climates)
+                    {
+                        <option value="@climate" selected="@(Model.Climate == climate)">
+                            @climate
+                        </option>
+                    }
+                </select>
+                <span asp-validation-for="Climate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="HabitatType" class="control-label"></label>
+                <select asp-for="HabitatType" class="form-control">
+                    @foreach (var habitat in habitatTypes)
+                    {
+                        <option value="@(Convert.ToInt32(habitat))" selected="@(Model.HabitatType.HasFlag(habitat))">
+                            @habitat
+                        </option>
+                    }
+                </select>
+                <span asp-validation-for="HabitatType" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SecurityLevel" class="control-label"></label>
+                <select asp-for="SecurityLevel" class="form-control">
+                    @foreach (var level in securityLevels)
+                    {
+                        <option value="@level" selected="@(Model.SecurityLevel == level)">
+                            @level
+                        </option>
+                    }
+                </select>
+                <span asp-validation-for="SecurityLevel" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Size" class="control-label"></label>
+                <input asp-for="Size" class="form-control" placeholder="Bijv. 1000" />
+                <span asp-validation-for="Size" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Opslaan" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Annuleren</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
