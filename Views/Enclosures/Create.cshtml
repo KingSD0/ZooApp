@@ -37,15 +37,19 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="HabitatType" class="control-label"></label>
-                <select asp-for="HabitatType" class="form-control">
-                    @foreach (var habitat in habitatTypes)
+                <label class="control-label">HabitatType</label>
+                <div class="form-check">
+                    @foreach (var habitat in habitatTypes.Where(h => h != ZooApp.Models.HabitatType.None))
                     {
-                        <option value="@(Convert.ToInt32(habitat))" selected="@(Model.HabitatType.HasFlag(habitat))">
-                            @habitat
-                        </option>
+                        <div>
+                            <input type="checkbox"
+                                   name="habitatValues"
+                                   value="@((int)habitat)"
+                                   class="form-check-input" />
+                            <label class="form-check-label">@habitat</label>
+                        </div>
                     }
-                </select>
+                </div>
                 <span asp-validation-for="HabitatType" class="text-danger"></span>
             </div>
 
@@ -77,7 +81,6 @@
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }

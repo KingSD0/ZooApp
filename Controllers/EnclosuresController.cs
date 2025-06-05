@@ -48,9 +48,11 @@ namespace ZooApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Enclosure enclosure, int[] habitatValues)
         {
-            enclosure.HabitatType = habitatValues
-                .Select(h => (HabitatType)h)
-                .Aggregate(HabitatType.None, (current, next) => current | next);
+            enclosure.HabitatType = 0;
+            foreach (var val in habitatValues)
+            {
+                enclosure.HabitatType |= (HabitatType)val;
+            }
 
             if (ModelState.IsValid)
             {
