@@ -175,6 +175,32 @@ namespace ZooApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+        public IActionResult Sunrise()
+        {
+            var animals = _context.Animals.ToList();
+
+            var result = animals.Select(a => new
+            {
+                a.Name,
+                a.ActivityPattern,
+                Status = a.ActivityPattern switch
+                {
+                    ActivityPattern.Diurnal => "Wordt wakker",
+                    ActivityPattern.Nocturnal => "Gaat slapen",
+                    ActivityPattern.Cathemeral => "Altijd actief",
+                    _ => "Onbekend"
+                }
+            });
+
+            return View(result);
+        }
+
+
+
+
+
+
         private bool AnimalExists(int id)
         {
             return _context.Animals.Any(e => e.Id == id);

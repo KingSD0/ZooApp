@@ -1,0 +1,29 @@
+﻿@model IEnumerable<dynamic>
+@{
+    ViewData["Title"] = "Sunrise - Activiteit dieren";
+}
+
+<h1>Sunrise</h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Naam</th>
+            <th>Activiteitspatroon</th>
+            <th>Status bij zonsopkomst</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.ActivityPattern</td>
+                <td>@item.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <a asp-action="Index" class="btn btn-secondary">Terug naar overzicht</a>
+</p>
