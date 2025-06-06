@@ -21,5 +21,17 @@ appsettings.json
 # Rider
 .idea/
 
+# xUnit testresultaten (handig bij CI-tools)
+TestResults/
+*.coverage
+
+# VSCode gebruikersinstellingen
+.vscode/
+
+# NuGet pakketten lokaal
+*.nupkg
+*.snupkg
+packages/
+
 # Others
 *.db

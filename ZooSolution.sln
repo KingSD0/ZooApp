@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35222.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZooApp", "ZooApp\ZooApp.csproj", "{30F04120-C417-4608-BDD4-1905C09BD38E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZooApp.Tests", "ZooApp.Tests\ZooApp.Tests.csproj", "{6F5B4D96-9869-4094-8DE5-0F7871740E54}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{30F04120-C417-4608-BDD4-1905C09BD38E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30F04120-C417-4608-BDD4-1905C09BD38E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30F04120-C417-4608-BDD4-1905C09BD38E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30F04120-C417-4608-BDD4-1905C09BD38E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F5B4D96-9869-4094-8DE5-0F7871740E54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F5B4D96-9869-4094-8DE5-0F7871740E54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F5B4D96-9869-4094-8DE5-0F7871740E54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F5B4D96-9869-4094-8DE5-0F7871740E54}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C88AFAE0-63E0-4A39-8C60-4E0DC5D15823}
+	EndGlobalSection
+EndGlobal

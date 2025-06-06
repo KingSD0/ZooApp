@@ -178,23 +178,18 @@ namespace ZooApp.Controllers
 
         public IActionResult Sunrise()
         {
-            var animals = _context.Animals.ToList();
-
-            var result = animals.Select(a => new
-            {
-                a.Name,
-                a.ActivityPattern,
-                Status = a.ActivityPattern switch
+            var animals = _context.Animals
+                .AsEnumerable()
+                .Select(a => new
                 {
-                    ActivityPattern.Diurnal => "Wordt wakker",
-                    ActivityPattern.Nocturnal => "Gaat slapen",
-                    ActivityPattern.Cathemeral => "Altijd actief",
-                    _ => "Onbekend"
-                }
-            });
+                    a.Name,
+                    a.ActivityPattern,
+                    Status = a.GetSunriseStatus()
+                });
 
-            return View(result);
+            return View(animals);
         }
+
 
 
 
