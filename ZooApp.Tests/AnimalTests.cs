@@ -1,10 +1,10 @@
-using Xunit;
+﻿using Xunit;
 using ZooApp.Models;
 
 namespace ZooApp.Tests
 {
     /// <summary>
-    /// Bevat unittests voor logica binnen het Animal-model, inclusief status bij zonsopkomst, zonsondergang en feeding time.
+    /// Bevat unittests voor logica binnen het Animal-model, inclusief status bij zonsopkomst, zonsondergang feeding time en constraints.
     /// </summary>
     public class AnimalTests
     {
@@ -113,5 +113,62 @@ namespace ZooApp.Tests
             var result = omnivore.GetFeedingDescription();
             Assert.Equal("Eet zowel planten als vlees", result);
         }
-    }
+
+        /// <summary>
+        /// Test of GetConstraintStatus een waarschuwing retourneert bij te lage beveiliging.
+        /// </summary>
+        [Fact]
+        public void GetConstraintStatus_ReturnsWarning_WhenSecurityIsTooLow()
+        {
+            // Arrange
+            var animal = new Animal
+            {
+                Name = "Testleeuw",
+                SpaceRequirement = 10,
+                SecurityRequirement = SecurityLevel.High
+            };
+
+            var enclosure = new Enclosure
+            {
+                Name = "Testverblijf",
+                Size = 15,
+                SecurityLevel = SecurityLevel.Medium
+            };
+
+            // Act
+            var result = animal.GetConstraintStatus(enclosure);
+
+            // Assert
+            Assert.Contains("Onvoldoende beveiliging", result);
+        }
+        
+        /// <summary>
+        /// Test of GetConstraintStatus een succesmelding retourneert als aan alle eisen is voldaan.
+        /// </summary>
+        [Fact]
+        public void GetConstraintStatus_ReturnsSuccess_WhenAllRequirementsMet()
+        {
+            // Arrange
+            var animal = new Animal
+            {
+                Name = "Testolifant",
+                SpaceRequirement = 20,
+                SecurityRequirement = SecurityLevel.Medium
+            };
+
+            var enclosure = new Enclosure
+            {
+                Name = "Groot verblijf",
+                Size = 50,
+                SecurityLevel = SecurityLevel.High
+            };
+
+            // Act
+            var result = animal.GetConstraintStatus(enclosure);
+
+            // Assert
+            Assert.Equal("✅ Voldoet aan alle verblijfseisen.", result);
+        }
+    
+}
 }

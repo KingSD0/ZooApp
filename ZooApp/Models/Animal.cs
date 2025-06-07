@@ -136,6 +136,39 @@ namespace ZooApp.Models
             };
         }
 
+        /// <summary>
+        /// Controleert of het dier voldoet aan belangrijke verblijfseisen,
+        /// zoals benodigde ruimte en beveiligingsniveau.
+        /// </summary>
+        /// <returns>
+        /// Een string met statusinformatie over de ruimte en beveiliging. 
+        /// Bevat waarschuwingen indien er niet aan de eisen voldaan is.
+        /// </returns>
+        public string GetConstraintStatus(Enclosure enclosure)
+        {
+            var messages = new List<string>();
+
+            if (enclosure == null)
+            {
+                messages.Add("⚠️ Geen verblijf gekoppeld.");
+            }
+            else
+            {
+                // Check ruimtevereiste
+                if (enclosure.Size < SpaceRequirement)
+                    messages.Add($"⚠️ Onvoldoende ruimte (nodig: {SpaceRequirement} m², beschikbaar: {enclosure.Size} m²).");
+
+                // Check beveiliging
+                if (enclosure.SecurityLevel < SecurityRequirement)
+                    messages.Add($"⚠️ Onvoldoende beveiliging (vereist: {SecurityRequirement}, huidig: {enclosure.SecurityLevel}).");
+            }
+
+            if (!messages.Any())
+                return "✅ Voldoet aan alle verblijfseisen.";
+
+            return string.Join(" ", messages);
+        }
+
 
     }
 }

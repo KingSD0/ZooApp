@@ -249,6 +249,36 @@ namespace ZooApp.Controllers
         }
 
 
+        /// <summary>
+        /// Geeft per verblijf een overzicht van de constraintstatus van dieren,
+        /// zoals voldoende ruimte en beveiliging.
+        /// </summary>
+        /// <returns>Een view met constraintinformatie per verblijf en dier.</returns>
+        public IActionResult CheckConstraints()
+        {
+            var enclosures = _context.Enclosures
+                .Include(e => e.Animals)
+                .ToList();
+
+            var result = enclosures.Select(e => new
+            {
+                EnclosureName = e.Name,
+                SecurityLevel = e.SecurityLevel,
+                Constraints = e.Animals.Select(a => new
+                {
+                    a.Name,
+                    a.Species,
+                    a.SpaceRequirement,
+                    a.SecurityRequirement,
+                    Status = a.GetConstraintStatus(e) // correcte aanroep
+                })
+            });
+
+            return View(result);
+        }
+
+
+
 
 
         /// <summary>
