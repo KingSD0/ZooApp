@@ -35,6 +35,6 @@ app.UseAuthorization();
 // Route-configuratie voor MVC
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Animals}/{action=Index}/{id?}");
 
 app.Run();
