@@ -62,5 +62,18 @@ namespace ZooApp.Tests
 
             Assert.Equal("Onbekend", result);
         }
+
+        [Fact]
+        public void GetSunsetStatus_ReturnsExpectedValues()
+        {
+            var diurnal = new Animal { ActivityPattern = ActivityPattern.Diurnal };
+            var nocturnal = new Animal { ActivityPattern = ActivityPattern.Nocturnal };
+            var cathemeral = new Animal { ActivityPattern = ActivityPattern.Cathemeral };
+
+            Assert.Equal("Gaat slapen", diurnal.GetSunsetStatus());
+            Assert.Equal("Wordt wakker", nocturnal.GetSunsetStatus());
+            Assert.Equal("Altijd actief", cathemeral.GetSunsetStatus());
+        }
+
     }
 }

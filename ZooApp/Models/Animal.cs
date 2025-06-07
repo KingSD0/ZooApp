@@ -97,5 +97,17 @@ namespace ZooApp.Models
                 _ => "Onbekend"
             };
         }
+
+        public string GetSunsetStatus()
+        {
+            return ActivityPattern switch
+            {
+                ActivityPattern.Diurnal => "Gaat slapen",
+                ActivityPattern.Nocturnal => "Wordt wakker",
+                ActivityPattern.Cathemeral => "Altijd actief",
+                _ => "Onbekend"
+            };
+        }
+
     }
 }

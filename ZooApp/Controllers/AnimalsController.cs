@@ -191,6 +191,19 @@ namespace ZooApp.Controllers
         }
 
 
+        public IActionResult Sunset()
+        {
+            var animals = _context.Animals.ToList();
+
+            var result = animals.Select(a => new
+            {
+                a.Name,
+                a.ActivityPattern,
+                Status = a.GetSunsetStatus()
+            });
+
+            return View(result);
+        }
 
 
 
