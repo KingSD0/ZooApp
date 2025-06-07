@@ -63,6 +63,10 @@ namespace ZooApp.Tests
             Assert.Equal("Onbekend", result);
         }
 
+        /// <summary>
+        /// Test of de juiste status wordt teruggegeven bij zonsondergang,
+        /// afhankelijk van het activiteitspatroon van het dier.
+        /// </summary>
         [Fact]
         public void GetSunsetStatus_ReturnsExpectedValues()
         {

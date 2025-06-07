@@ -176,6 +176,11 @@ namespace ZooApp.Controllers
         }
 
 
+        /// <summary>
+        /// Geeft een overzicht van dieren met hun status bij zonsopkomst,
+        /// gebaseerd op hun activiteitspatroon.
+        /// </summary>
+        /// <returns>Een weergave met diernaam, activiteitspatroon en sunrise-status.</returns>
         public IActionResult Sunrise()
         {
             var animals = _context.Animals
@@ -190,7 +195,11 @@ namespace ZooApp.Controllers
             return View(animals);
         }
 
-
+        /// <summary>
+        /// Geeft een overzicht van dieren met hun status bij zonsondergang,
+        /// gebaseerd op hun activiteitspatroon.
+        /// </summary>
+        /// <returns>Een weergave met diernaam, activiteitspatroon en sunset-status.</returns>
         public IActionResult Sunset()
         {
             var animals = _context.Animals.ToList();
@@ -205,15 +214,20 @@ namespace ZooApp.Controllers
             return View(result);
         }
 
-
-
-
-
+        /// <summary>
+        /// Controleert of een dier met een specifiek ID bestaat in de database.
+        /// </summary>
+        /// <param name="id">Het ID van het dier.</param>
+        /// <returns>True als het dier bestaat, anders false.</returns>
         private bool AnimalExists(int id)
         {
             return _context.Animals.Any(e => e.Id == id);
         }
 
+        /// <summary>
+        /// Vult de ViewData en ViewBag met dropdown-opties voor dierformulieren (Create/Edit).
+        /// </summary>
+        /// <param name="animal">Optioneel: huidig dier om de geselecteerde waarden vooraf in te stellen.</param>
         private void PopulateDropdowns(Animal? animal = null)
         {
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", animal?.CategoryId);
@@ -224,5 +238,6 @@ namespace ZooApp.Controllers
             ViewBag.ActivityPattern = new SelectList(Enum.GetValues(typeof(ActivityPattern)).Cast<ActivityPattern>());
             ViewBag.SecurityRequirement = new SelectList(Enum.GetValues(typeof(SecurityLevel)).Cast<SecurityLevel>());
         }
+
     }
 }
