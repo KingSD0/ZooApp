@@ -37,4 +37,13 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Animals}/{action=Index}/{id?}");
 
+// Seed de database met testdata bij startup
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<ZooContext>();
+    DbInitializer.Seed(context);
+}
+
+
 app.Run();

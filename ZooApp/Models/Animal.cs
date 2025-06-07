@@ -98,6 +98,12 @@ namespace ZooApp.Models
             };
         }
 
+        /// <summary>
+        /// Bepaalt de status van het dier bij zonsondergang op basis van het activiteitspatroon.
+        /// </summary>
+        /// <returns>
+        /// "Gaat slapen" voor Diurnal, "Wordt wakker" voor Nocturnal, "Altijd actief" voor Cathemeral, of "Onbekend" voor overige.
+        /// </returns>
         public string GetSunsetStatus()
         {
             return ActivityPattern switch
@@ -108,6 +114,28 @@ namespace ZooApp.Models
                 _ => "Onbekend"
             };
         }
+
+        /// <summary>
+        /// Geeft een beschrijving van het voedingsgedrag van het dier.
+        /// </summary>
+        /// <returns>
+        /// Een string zoals "Eet prooidieren: Zebra" of "Eet plantaardig" afhankelijk van de voedingsklasse.
+        /// </returns>
+        public string GetFeedingDescription()
+        {
+            return DietaryClass switch
+            {
+                DietaryClass.Carnivore when Prey != null && Prey.Any() =>
+                    $"Eet prooidieren: {string.Join(", ", Prey.Select(p => p.Name))}",
+                DietaryClass.Carnivore => "Vleeseter",
+                DietaryClass.Herbivore => "Eet plantaardig",
+                DietaryClass.Omnivore => "Eet zowel planten als vlees",
+                DietaryClass.Insectivore => "Eet insecten",
+                DietaryClass.Piscivore => "Eet vis",
+                _ => "Onbekend dieet"
+            };
+        }
+
 
     }
 }

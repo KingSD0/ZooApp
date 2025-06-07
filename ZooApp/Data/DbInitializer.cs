@@ -46,6 +46,25 @@ namespace ZooApp.Data
             var animals = animalFaker.Generate(10);
             context.Animals.AddRange(animals);
             context.SaveChanges();
+
+            // Voeg nu prooidieren toe aan carnivoren
+            var allAnimals = context.Animals.Include(a => a.Enclosure).ToList();
+            var carnivores = allAnimals.Where(a => a.DietaryClass == DietaryClass.Carnivore).ToList();
+            var potentialPrey = allAnimals.Where(a => a.DietaryClass != DietaryClass.Carnivore).ToList();
+
+            foreach (var carnivore in carnivores)
+            {
+                // Selecteer max 2 willekeurige prooidieren die niet de carnivoor zelf zijn
+                var prey = potentialPrey
+                    .Where(p => p.Id != carnivore.Id)
+                    .OrderBy(_ => Guid.NewGuid())
+                    .Take(2)
+                    .ToList();
+
+                carnivore.Prey = prey;
+            }
+
+            context.SaveChanges();
         }
     }
 }

@@ -4,7 +4,7 @@ using ZooApp.Models;
 namespace ZooApp.Tests
 {
     /// <summary>
-    /// Bevat unittests voor de GetSunriseStatus-methode van Animal.
+    /// Bevat unittests voor logica binnen het Animal-model, inclusief status bij zonsopkomst, zonsondergang en feeding time.
     /// </summary>
     public class AnimalTests
     {
@@ -79,5 +79,39 @@ namespace ZooApp.Tests
             Assert.Equal("Altijd actief", cathemeral.GetSunsetStatus());
         }
 
+        /// <summary>
+        /// Test of de juiste beschrijving wordt gegenereerd voor FeedingTime,
+        /// inclusief het vermelden van prooidieren indien aanwezig.
+        /// </summary>
+        [Fact]
+        public void GetFeedingDescription_ReturnsCorrectText_ForCarnivoreWithPrey()
+        {
+            // Arrange
+            var prey1 = new Animal { Name = "Hertje" };
+            var prey2 = new Animal { Name = "Konijn" };
+            var predator = new Animal
+            {
+                Name = "Leeuw",
+                DietaryClass = DietaryClass.Carnivore,
+                Prey = new List<Animal> { prey1, prey2 }
+            };
+
+            // Act
+            var result = predator.GetFeedingDescription();
+
+            // Assert
+            Assert.Equal("Eet prooidieren: Hertje, Konijn", result);
+        }
+
+        /// <summary>
+        /// Test of een omnivoor de juiste voedingsomschrijving geeft.
+        /// </summary>
+        [Fact]
+        public void GetFeedingDescription_ReturnsOmnivoreText()
+        {
+            var omnivore = new Animal { DietaryClass = DietaryClass.Omnivore };
+            var result = omnivore.GetFeedingDescription();
+            Assert.Equal("Eet zowel planten als vlees", result);
+        }
     }
 }
