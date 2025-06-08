@@ -222,12 +222,23 @@ namespace ZooApp.Controllers
         }
 
 
+        public IActionResult CheckConstraints()
+        {
+            var enclosures = _context.Enclosures
+                .Include(e => e.Animals)
+                .ToList();
 
+            var result = enclosures.Select(e => new
+            {
+                e.Name,
+                e.Size,
+                AnimalCount = e.Animals.Count,
+                TotalRequiredSpace = e.Animals.Sum(a => a.SpaceRequirement),
+                Status = e.GetConstraintStatus()
+            });
 
-
-
-
-
+            return View(result);
+        }
 
 
         private bool EnclosureExists(int id)

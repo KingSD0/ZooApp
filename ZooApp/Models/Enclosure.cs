@@ -51,5 +51,31 @@ namespace ZooApp.Models
         [Range(0.1, 10000.0, ErrorMessage = "Oppervlakte moet tussen 0.1 en 10000 m² zijn.")]
         [Display(Name = "Oppervlakte (m²)")]
         public double Size { get; set; }
+
+        /// <summary>
+        /// Controleert of het verblijf voldoet aan algemene eisen, zoals minimaal aantal dieren en totale ruimtegebruik.
+        /// </summary>
+        /// <returns>Een string met statusinformatie of waarschuwingen over het verblijf zelf.</returns>
+        public string GetConstraintStatus()
+        {
+            var messages = new List<string>();
+
+            if (Animals == null || !Animals.Any())
+            {
+                messages.Add("⚠️ Geen dieren in dit verblijf.");
+            }
+
+            double totalSpace = Animals?.Sum(a => a.SpaceRequirement) ?? 0;
+            if (Size < totalSpace)
+            {
+                messages.Add($"⚠️ Onvoldoende ruimte (vereist: {totalSpace:F2} m², beschikbaar: {Size:F2} m²).");
+            }
+
+            if (!messages.Any())
+                return "✅ Verblijf voldoet aan alle eisen.";
+
+            return string.Join(" ", messages);
+        }
+
     }
 }

@@ -1,0 +1,35 @@
+﻿@model IEnumerable<dynamic>
+
+@{
+    ViewData["Title"] = "Verblijf Constraints";
+}
+
+<h1 class="mb-4">🏠 Verblijf Constraints</h1>
+
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Naam verblijf</th>
+            <th>Oppervlakte (m²)</th>
+            <th>Aantal dieren</th>
+            <th>Benodigde ruimte</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="@(item.Status.StartsWith("✅") ? "" : "table-danger")">
+                <td>@item.Name</td>
+                <td>@item.Size</td>
+                <td>@item.AnimalCount</td>
+                <td>@item.TotalRequiredSpace.ToString("F2")</td>
+                <td>@item.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <a asp-action="Index" class="btn btn-secondary">Terug naar overzicht</a>
+</p>
