@@ -1,0 +1,37 @@
+﻿@model IEnumerable<dynamic>
+@{
+    ViewData["Title"] = "Feeding Time - Verblijven";
+}
+
+<h1 class="mb-4">🍽️ Feeding Time per Verblijf</h1>
+
+@foreach (var enclosure in Model)
+{
+    <div class="card mb-4">
+        <div class="card-header bg-success text-white fw-bold">
+            Verblijf: @enclosure.EnclosureName
+        </div>
+        <div class="card-body">
+            @if (!string.IsNullOrEmpty(enclosure.Warning))
+            {
+                <div class="alert alert-danger fw-bold">
+                    ⚠️ @enclosure.Warning
+                </div>
+            }
+
+            <ul class="list-group list-group-flush">
+                @foreach (var animal in enclosure.DietDetails)
+                {
+                    <li class="list-group-item">
+                        <strong>@animal.Name</strong> (<em>@animal.DietaryClass</em>):
+                        @animal.Description
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+}
+
+<p>
+    <a asp-controller="Enclosures" asp-action="Index" class="btn btn-outline-secondary">Terug naar overzicht</a>
+</p>

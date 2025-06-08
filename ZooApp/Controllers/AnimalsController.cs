@@ -215,34 +215,20 @@ namespace ZooApp.Controllers
         }
 
         /// <summary>
-        /// Genereert het voedingsrapport per verblijf met voederinformatie per dier.
+        /// Toont voederinformatie per dier (los van verblijf).
         /// </summary>
-        /// <remarks>
-        /// Maakt gebruik van <c>GetFeedingDescription()</c> uit het <c>Animal</c>-model.
-        /// Geeft per verblijf een waarschuwing als roofdieren samen met hun prooidieren gehuisvest zijn.
-        /// </remarks>
-        /// <returns>Een view met per verblijf de dieetdetails van de dieren en eventuele waarschuwingen.</returns>
+        /// <returns>Een view met dieetgedrag van alle dieren.</returns>
         public IActionResult FeedingTime()
         {
-            var enclosures = _context.Enclosures
-                .Include(e => e.Animals)
-                .ThenInclude(a => a.Prey)
+            var animals = _context.Animals
+                .Include(a => a.Prey)
                 .ToList();
 
-            var result = enclosures.Select(e => new
+            var result = animals.Select(a => new
             {
-                EnclosureName = e.Name,
-                DietDetails = e.Animals.Select(a => new
-                {
-                    a.Name,
-                    a.DietaryClass,
-                    Description = a.GetFeedingDescription()
-                }),
-                Warning = e.Animals.Any(predator =>
-                    predator.DietaryClass == DietaryClass.Carnivore &&
-                    predator.Prey != null &&
-                    predator.Prey.Any(prey => e.Animals.Contains(prey))
-                ) ? " Let op: prooidieren aanwezig bij roofdieren!" : null
+                a.Name,
+                a.DietaryClass,
+                Description = a.GetFeedingDescription()
             });
 
             return View(result);
