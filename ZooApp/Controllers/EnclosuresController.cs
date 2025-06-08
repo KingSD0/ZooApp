@@ -134,6 +134,59 @@ namespace ZooApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+        /// <summary>
+        /// Geeft per verblijf een overzicht van dieren en hun status bij zonsopkomst,
+        /// gebaseerd op hun activiteitspatroon.
+        /// </summary>
+        /// <returns>Een weergave met verblijfnaam, diergegevens en sunrise-status.</returns>
+        public IActionResult Sunrise()
+        {
+            var enclosures = _context.Enclosures
+                .Include(e => e.Animals)
+                .ToList();
+
+            var result = enclosures.Select(e => new
+            {
+                EnclosureName = e.Name,
+                SunriseStatuses = e.Animals.Select(a => new
+                {
+                    a.Name,
+                    a.ActivityPattern,
+                    Status = a.GetSunriseStatus()
+                })
+            });
+
+            return View(result);
+        }
+
+
+        /// <summary>
+        /// Geeft per verblijf een overzicht van dieren en hun status bij zonsondergang,
+        /// gebaseerd op hun activiteitspatroon.
+        /// </summary>
+        /// <returns>Een weergave met verblijfnaam, diergegevens en sunset-status.</returns>
+        public IActionResult Sunset()
+        {
+            var enclosures = _context.Enclosures
+                .Include(e => e.Animals)
+                .ToList();
+
+            var result = enclosures.Select(e => new
+            {
+                EnclosureName = e.Name,
+                SunsetStatuses = e.Animals.Select(a => new
+                {
+                    a.Name,
+                    a.ActivityPattern,
+                    Status = a.GetSunsetStatus()
+                })
+            });
+
+            return View(result);
+        }
+
+
         /// <summary>
         /// Genereert het voedingsrapport per verblijf met voederinformatie per dier.
         /// </summary>

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<dynamic>
+@{
+    ViewData["Title"] = "Sunset - Activiteit per verblijf";
+}
+
+<h1>Sunset</h1>
+
+@foreach (var enclosure in Model)
+{
+    <div class="card mb-4">
+        <div class="card-header bg-dark text-white fw-bold">
+            Verblijf: @enclosure.EnclosureName
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-sm">
+                <thead>
+                    <tr>
+                        <th>Naam</th>
+                        <th>Activiteitspatroon</th>
+                        <th>Status bij zonsondergang</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var animal in enclosure.SunsetStatuses)
+                    {
+                        <tr>
+                            <td>@animal.Name</td>
+                            <td>@animal.ActivityPattern</td>
+                            <td>@animal.Status</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+<p>
+    <a asp-action="Index" class="btn btn-secondary">Terug naar overzicht</a>
+</p>
