@@ -1,0 +1,53 @@
+﻿@model IEnumerable<dynamic>
+
+@{
+    ViewData["Title"] = "Sunrise - Zoo";
+}
+
+<h1>🌅 Sunrise in de Dierentuin</h1>
+
+@foreach (var enclosure in Model)
+{
+    <div class="card mb-4">
+        <div class="card-header bg-info text-white fw-bold">
+            Verblijf: @enclosure.EnclosureName
+        </div>
+        <div class="card-body">
+            @{
+                var animals = enclosure.SunriseStatuses as IEnumerable<dynamic>;
+            }
+
+            @if (animals == null || !animals.Any())
+            {
+                <p><em>Geen dieren in dit verblijf.</em></p>
+            }
+            else
+            {
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th>Naam</th>
+                            <th>Activiteitspatroon</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var animal in animals)
+                        {
+                            <tr>
+                                <td>@animal.Name</td>
+                                <td>@animal.ActivityPattern</td>
+                                <td>@animal.Status</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+
+        </div>
+    </div>
+}
+
+<p>
+    <a asp-action="Index" class="btn btn-secondary">Terug naar overzicht</a>
+</p>

@@ -35,7 +35,7 @@ app.UseAuthorization();
 // Route-configuratie voor MVC
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Animals}/{action=Index}/{id?}");
+    pattern: "{controller=Zoo}/{action=Index}/{id?}");
 
 // Seed de database met testdata bij startup
 using (var scope = app.Services.CreateScope())
