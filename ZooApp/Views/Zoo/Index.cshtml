@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Dierentuin overzicht";
+    ViewData["Title"] = "Dierentuinoverzicht";
 }
 
 <h1>🏛️ Dierentuinoverzicht</h1>
@@ -11,4 +11,25 @@
     <a asp-action="CheckConstraints" class="btn btn-danger">🔍 Controleer verblijfseisen</a>
 </div>
 
+@if (TempData["AutoAssignMessage"] != null)
+{
+    <div class="alert alert-success">
+        <i class="bi bi-check-circle-fill"></i> @TempData["AutoAssignMessage"]
+    </div>
+}
+
 <p>Kies een actie om alle dieren in de dierentuin te analyseren.</p>
+
+<form asp-action="AutoAssign" method="post" class="mt-4">
+    <div class="mb-2">
+        <label for="strategy" class="form-label fw-bold">Strategie:</label>
+        <select name="strategy" class="form-select" style="max-width: 400px;">
+            <option value="nieuw">🗑️ Verwijder alles en wijs opnieuw toe</option>
+            <option value="aanvullen">📦 Gebruik bestaande verblijven en vul aan</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        🔄 AutoAssign uitvoeren
+    </button>
+</form>

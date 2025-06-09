@@ -221,7 +221,12 @@ namespace ZooApp.Controllers
             return View(result);
         }
 
-
+        /// <summary>
+        /// Controleert per verblijf of het voldoet aan de vereisten qua ruimte op basis van het aantal dieren.
+        /// </summary>
+        /// <returns>
+        /// Een weergave met per verblijf: naam, grootte, aantal dieren, benodigde ruimte en constraintstatus.
+        /// </returns>
         public IActionResult CheckConstraints()
         {
             var enclosures = _context.Enclosures
