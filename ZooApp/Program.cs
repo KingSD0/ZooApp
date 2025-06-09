@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Globalization; // Nodig voor cultuurinstellingen
-using ZooApp.Data; // Zorg dat dit overeenkomt met jouw mapstructuur
+using ZooApp.Data;
+using ZooApp.Services; // Zorg dat dit overeenkomt met jouw mapstructuur
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,7 @@ builder.Services.AddDbContext<ZooContext>(options =>
 
 // Voeg controllers en views toe
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IZooService, ZooService>();
 
 var app = builder.Build();
 
