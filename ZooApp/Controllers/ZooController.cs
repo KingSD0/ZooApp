@@ -96,17 +96,18 @@ namespace ZooApp.Controllers
                     pred.DietaryClass == DietaryClass.Carnivore &&
                     pred.Prey != null &&
                     pred.Prey.Any(p => e.Animals.Contains(p)))
-                    ? " Let op: prooidieren aanwezig bij roofdieren!"
-                    : null,
+         ? "Let op: prooidieren aanwezig bij roofdieren!"
+         : null,
                 DietDetails = e.Animals.Select(a => new
                 {
                     a.Name,
                     a.DietaryClass,
                     Description = a.GetFeedingDescription()
-                })
-            });
+                }).ToList()
+            }).ToList(); // <<< BELANGRIJK
 
             return View(result);
+
         }
 
         /// <summary>
