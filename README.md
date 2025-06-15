@@ -62,11 +62,19 @@ Deze zijn opgenomen in het document Wireframes-VirtueleDierentuin.pdf en geven e
 
 ---
 ## 📁 Ingeleverde documenten
-- Dierentuin-DesignDocument-ShailoDouglas.docx
-- Testplan-VirtueleDierentuin.docx
-- Wireframes-VirtueleDierentuin.pdf
-- README.md
+
+De volgende documenten zijn toegevoegd aan de repository in de map `Docs/` (of root):
+
+- ✅ **Dierentuin-DesignDocument-ShailoDouglas.docx** - bevat het technisch en functioneel ontwerp.
+- ✅ **Testplan-VirtueleDierentuin_S1157233.docx** - beschrijft de teststrategie, testgevallen en testresultaten.
+- ✅ **Reflectie-VirtueleDierentuin_S1157233.docx** - persoonlijke reflectie op het ontwikkelproces.
+- ✅ **Wireframes-VirtueleDierentuin.pdf** - visueel ontwerp van belangrijke schermen.
+- ✅ **ERD.png** - entiteit-relatie diagram van het datamodel.
+- ✅ **README.md** - dit document, met uitleg over de opzet en werking van het project.
+
 ---
+
+
 
 ## 👤 Auteur - **Shailo Douglas**
 **Studentnummer**: S1157233
