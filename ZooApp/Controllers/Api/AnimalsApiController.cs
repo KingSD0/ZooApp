@@ -55,11 +55,19 @@ namespace ZooApp.Controllers.Api
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Animal animal)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
             _context.Animals.Add(animal);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetById), new { id = animal.Id }, animal);
+
+            // Herlaad het dier met de gekoppelde category en enclosure
+            var fullAnimal = await _context.Animals
+                .Include(a => a.Category)
+                .Include(a => a.Enclosure)
+                .FirstOrDefaultAsync(a => a.Id == animal.Id);
+
+            return CreatedAtAction(nameof(GetById), new { id = fullAnimal!.Id }, fullAnimal);
         }
 
         /// <summary>
