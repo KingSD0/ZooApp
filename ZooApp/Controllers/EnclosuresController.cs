@@ -205,21 +205,25 @@ namespace ZooApp.Controllers
             var result = enclosures.Select(e => new
             {
                 EnclosureName = e.Name,
+                Warning = e.Animals
+                    .Where(a => a.DietaryClass == DietaryClass.Carnivore && a.Prey != null)
+                    .SelectMany(a => a.Prey
+                        .Where(p => e.Animals.Any(ea => ea.Id == p.Id))
+                        .Select(p => $" {a.Name} deelt verblijf met prooi {p.Name}")
+                    )
+                    .FirstOrDefault(),
                 DietDetails = e.Animals.Select(a => new
                 {
                     a.Name,
                     a.DietaryClass,
                     Description = a.GetFeedingDescription()
-                }),
-                Warning = e.Animals.Any(predator =>
-                    predator.DietaryClass == DietaryClass.Carnivore &&
-                    predator.Prey != null &&
-                    predator.Prey.Any(prey => e.Animals.Contains(prey))
-                ) ? " Let op: prooidieren aanwezig bij roofdieren!" : null
+                })
             });
 
-            return View(result);
+            return View("FeedingTime", result);
         }
+
+
 
         /// <summary>
         /// Controleert per verblijf of het voldoet aan de vereisten qua ruimte op basis van het aantal dieren.

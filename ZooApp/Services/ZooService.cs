@@ -67,12 +67,16 @@ namespace ZooApp.Services
             return enclosures.Select(e => new
             {
                 EnclosureName = e.Name,
-                Warning = e.Animals.Any(pred =>
-                    pred.DietaryClass == DietaryClass.Carnivore &&
-                    pred.Prey != null &&
-                    pred.Prey.Any(p => e.Animals.Contains(p)))
-                    ? "Let op: prooidieren aanwezig bij roofdieren!"
-                    : null,
+
+                // Toont waarschuwing als carnivoor zijn prooi deelt in hetzelfde verblijf
+                Warning = e.Animals
+                    .Where(a => a.DietaryClass == DietaryClass.Carnivore && a.Prey != null)
+                    .SelectMany(a => a.Prey
+                        .Where(p => e.Animals.Any(ea => ea.Id == p.Id))
+                        .Select(p => $"⚠️ {a.Name} deelt verblijf met prooi {p.Name}")
+                    )
+                    .FirstOrDefault(), // Toon maximaal één waarschuwing per verblijf
+
                 DietDetails = e.Animals.Select(a => new
                 {
                     a.Name,
@@ -81,6 +85,7 @@ namespace ZooApp.Services
                 })
             }).ToList();
         }
+
 
         /// <summary>
         /// Controleert per verblijf of de ruimte voldoende is voor het aantal en type dieren.
