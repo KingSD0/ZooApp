@@ -27,7 +27,7 @@ De applicatie is een ASP.NET Core MVC-webapplicatie waarmee gebruikers een virtu
 - Faker (Bogus) voor seeding
 - GitHub voor versiebeheer
 - Visual Studio 2022
-- Postman (API-testing)
+- Swagger UI (API-testing)
 - xUnit (logica testen)
 
 ---
