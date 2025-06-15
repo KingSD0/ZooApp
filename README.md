@@ -48,7 +48,7 @@ powershell
 ---
 ## 🧪 Testen
 - Het project bevat een apart testplan waarin alle uitgevoerde tests zijn opgenomen.
-- Testtools: Postman (API-endpoints) en xUnit (logica zoals Sunrise)
+- Testtools: Swagger UI (API-endpoints) en xUnit (logica zoals Sunrise)
 - Handmatige tests zijn uitgevoerd via de webinterface
 - Alle testgevallen zijn opgenomen in het document Testplan-VirtueleDierentuin.docx
 
