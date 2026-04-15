@@ -1,4 +1,9 @@
 # ZooApp – Virtuele Dierentuinbeheerapplicatie
+<img width="1329" height="903" alt="image" src="https://github.com/user-attachments/assets/1fe4d7c3-2252-4567-8da6-8a66a4a1afe3" />
+<img width="1707" height="910" alt="image" src="https://github.com/user-attachments/assets/792f0946-fac6-4529-b5cc-e2f68e12b180" />
+<img width="1365" height="406" alt="image" src="https://github.com/user-attachments/assets/fb1e241c-9af3-47a8-9481-f454011c5ed5" />
+<img width="1347" height="592" alt="image" src="https://github.com/user-attachments/assets/51a85b84-c9f2-405d-8675-ab223c6cacbb" />
+
 
 Dit project is ontwikkeld als eindopdracht voor het leertraject C# aan WFHBO ICT.  
 De applicatie is een ASP.NET Core MVC-webapplicatie waarmee gebruikers een virtuele dierentuin kunnen beheren via zowel een webinterface als een REST API.
